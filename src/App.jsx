@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Persons from "./components/Persons";
-import Delete from "./components/Delete";
+
+import "./App.css";
+import { FaSearch } from "react-icons/fa";
 
 const url = "http://localhost:3000/persons";
 const App = () => {
@@ -41,22 +43,28 @@ const App = () => {
       setPersons(res.data);
     });
   }, []);
-  <Delete persons={persons} />;
+
   return (
     <>
-      <h1>PhoneBook</h1>
-      <form>
-        filter shown with <input />
-      </form>
+      <h1 className="header">PhoneBook📞</h1>
+      <div className="filter container">
+        <form>
+          Filter
+          <input />
+          <button className="search_button">
+            <FaSearch />
+          </button>
+        </form>
+      </div>
       <h1>Add a new</h1>
-      <form onSubmit={Add}>
+      <form onSubmit={Add} className="adding">
         name: <input value={newPerson} onChange={handleChange} />
         <br /> number: <input value={number} onChange={handleNumber} />
         <br />
-        <button>Add</button>
+        <button className="add_button">Add</button>
       </form>
       <h1>Numbers</h1>
-      <div className="container">
+      <div>
         {persons.map((person) => (
           <Persons key={person.id} person={person} />
         ))}
